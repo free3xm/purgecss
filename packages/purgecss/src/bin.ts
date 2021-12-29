@@ -122,7 +122,12 @@ async function run() {
       await writeCSSToFile(`${resultOutput}/${fileName}`, purgedResult.css);
     }
   } else {
-    console.log(JSON.stringify(purged));
+    for (const purgedResult of purged) {
+      if (purgedResult?.file) {
+        await writeCSSToFile(purgedResult.file, purgedResult.css);
+      } else console.log('file not found', JSON.stringify(purgedResult))
+
+    }
   }
 }
 
